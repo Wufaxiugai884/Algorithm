@@ -18,19 +18,19 @@ public class LinearSearch {
     }
 
     public static void main(String[] args) {
-        Integer[] data = {24, 18, 12, 9, 16, 66, 32, 4};
-        int res = LinearSearch.search(data, 16);
-        System.out.println(res);
 
-        int res2 = LinearSearch.search(data, 111);
-        System.out.println(res2);
+        int[] dataSize = {1000000, 10000000};
+        for (int n: dataSize){
+            Integer[] data = ArrayGenerator.generateOrderedArray(n);
 
-        Student[] students = {new Student("alice"),
-                new Student("boob"),
-                new Student("charles")
-        };
-        Student boob = new Student("boob");
-        int res3 = LinearSearch.search(students, boob);
-        System.out.println(res3);
+            long startTime = System.nanoTime();
+            for (int k = 0; k < 100; k++) {
+                LinearSearch.search(data, n);
+            }
+            long endTime = System.nanoTime();
+
+            double time = (endTime - startTime) / 1000000000.0;
+            System.out.println("n = " + n + ", 100 runs: " + time + "s");
+        }
     }
 }
